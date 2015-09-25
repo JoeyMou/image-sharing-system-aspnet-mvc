@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@{ 
+    Html.BeginForm("Register", "Account", FormMethod.Post);
+}
+
+<fieldset>
+    <legend> Provide User Infomation </legend>
+    <p>
+        Choose a use id:
+        @Html.TextBox("Userid")
+    </p>
+    <p>
+        Check if visually impaired:
+        @Html.CheckBox("ADA")
+    </p>
+    <input type="submit" value="Register" />
+</fieldset>
+
+@{ 
+    Html.EndForm();
+}
+

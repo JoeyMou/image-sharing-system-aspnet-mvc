@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload</h2>
+
+@{ Html.BeginForm("Upload", "Images", FormMethod.Post, new { enctype = "multipart/form-data"}); }
+
+<fieldset>
+    <legend>Enter Image Information</legend>
+    <p>
+       Image id: @Html.TextBox("Id") 
+                 @Html.ValidationMessage("Id")
+    </p>
+    <p>
+        Caption: @Html.TextBox("Caption")
+                 @Html.ValidationMessage("Caption")
+    </p>
+    <p>
+        Description:<br />
+        @Html.TextArea("Description", "Enter description here", 5, 60, null)
+        @Html.ValidationMessage("Description")
+    </p>
+    <p>
+        Date taken: @Html.TextBox("DateTaken")
+                    @Html.ValidationMessage("DateTaken")
+    </p>
+    <p>
+        <input type="file" name="ImageFile" />
+    </p>
+    <p>
+        <input type="submit" value="Upload" /> 
+    </p>
+</fieldset>
+
+<p> @ViewBag.Message </p>
+<p> @Html.ValidationSummary() </p>
+
+@{ Html.EndForm(); }
