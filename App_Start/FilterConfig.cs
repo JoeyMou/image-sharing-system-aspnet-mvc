@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace ImageSharingWithUpload
+namespace ImageSharingWithModel
 {
     public class FilterConfig
     {

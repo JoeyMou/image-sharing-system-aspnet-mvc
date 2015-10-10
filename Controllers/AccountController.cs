@@ -4,32 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ImageSharingWithUpload.Controllers
+using ImageSharingWithModel.DAL;
+using ImageSharingWithModel.Models;
+
+using System.Data.Entity;
+
+namespace ImageSharingWithModel.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        protected void CheckAda()
-        {
-            HttpCookie cookie = Request.Cookies.Get("ImageSharing");
-            if (cookie != null)
-            {
-                if ("true".Equals(cookie["ADA"]))
-                    ViewBag.isADA = true;
-                else
-                    ViewBag.isADA = false;
-            }
-            else
-                ViewBag.isADA = false;
-        }
 
-
-
-        // GET: Account
-        public ActionResult Index()
-        {
-            CheckAda();
-            return View();
-        }
+        private ImageSharingDB db = new ImageSharingDB();
 
         [HttpGet]
         public ActionResult Register()
@@ -48,18 +33,66 @@ namespace ImageSharingWithUpload.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(String Userid, Boolean ADA)
+        public ActionResult Register(UserView UserInfo)
         {
             CheckAda();
+
+            if (ModelState.IsValid) {
+                User User = db.Users.SingleOrDefault(u => u.Userid.Equals(UserInfo.Userid));
+                if (User == null)
+                {
+                    // save to database
+                    User = new User(UserInfo.Userid, UserInfo.ADA);
+                    db.Users.Add(User);
+                }
+                else
+                {
+                    User.ADA = UserInfo.ADA;
+                    db.Entry(User).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                
+
+                SaveCookie(UserInfo.Userid, UserInfo.ADA);
+               
+            }
+
+            ViewBag.Userid = UserInfo.Userid; 
+            return View("RegisterSuccess");
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            CheckAda();
+            ViewBag.Message = "";
+            return View();
+        }
+        [HttpGet]
+        public ActionResult DoLogin(String Userid)
+        {
+            CheckAda();
+            User User = db.Users.SingleOrDefault(u => u.Userid.Equals(Userid));
+            if (User != null)
+            {
+                SaveCookie(Userid, User.ADA);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Message = "No such user registered!";
+                return View("Login");
+            }
+        }
+
+        protected void SaveCookie(String userid, bool ADA)
+        {
+            // save in the cookie
             HttpCookie cookie = new HttpCookie("ImageSharing");
             cookie.Expires = DateTime.Now.AddDays(7);
-            cookie["Userid"] = Userid;
+            cookie["Userid"] = userid;
             cookie["ADA"] = ADA ? "true" : "false";
             Response.Cookies.Add(cookie);
- 
-
-            ViewBag.Userid = Userid; 
-            return View("RegisterSuccess");
         }
     }
 }

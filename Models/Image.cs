@@ -1,32 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-using System.ComponentModel.DataAnnotations;
-
-namespace ImageSharingWithUpload.Models
+namespace ImageSharingWithModel.Models
 {
     public class Image
+        /*
+         * Entity model for an image
+         */
     {
-        [Required]
-        [RegularExpression(@"[a-zA-Z0-9_]+")]
-        public String Id { get; set; }
-        [Required]
-        [StringLength(40)]
-        public String Caption { get; set; }
-        [Required]
-        [StringLength(200)]
-        public String Description { get; set; }
-        [Required]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id { get; set; }
+        [MaxLength(40)]
+        public virtual String Caption { get; set; }
+        [MaxLength(200)]
+        public virtual String Description { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DateTaken { get; set; }
-        public String Userid { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
+        public virtual DateTime DateTaken { get; set; }
 
-
-        public Image()
-        {
-
-        }
+        [ForeignKey("User")]
+        public virtual int UserId { get; set; }
+        public virtual User User { get; set; }
+        [ForeignKey("Tag")]
+        public virtual int TagId { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

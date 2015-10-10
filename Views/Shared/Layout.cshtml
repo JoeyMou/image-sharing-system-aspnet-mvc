@@ -34,7 +34,11 @@
         <nav id="nav">
             <ul>
                 <li>@Html.ActionLink("Register","Register", "Account")</li>
+                <li>@Html.ActionLink("Login", "Login", "Account")</li>
                 <li>@Html.ActionLink("Upload","Upload", "Images")</li>
+                <li>@Html.ActionLink("List All", "ListALL", "Images")</li>
+                <li>@Html.ActionLink("List by User", "ListByuser", "Images")</li>
+                <li>@Html.ActionLink("List by Tag", "ListByTag", "Images")</li>
                 <li>@Html.ActionLink("Query","Query", "Images")</li>
             </ul>
         </nav>
@@ -48,7 +52,7 @@
             @RenderBody()
         </article>
         <footer id="footer">
-             <p>&copy; @DateTime.Now.Year Your Name Here</p>
+             <p>&copy; @DateTime.Now.Year Joey Mou</p>
         </footer>
     </div>
 
