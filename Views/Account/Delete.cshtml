@@ -1,0 +1,43 @@
+﻿@model List<ImageSharingWithCloudServices.Models.SelectItemView>
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@{ Html.BeginForm("Delete", "Account", FormMethod.Post);}
+
+<fieldset>
+    <legend>DeActivate/ReActivate users</legend>
+
+    @Html.AntiForgeryToken()
+
+    <table class="gridTable">
+        <tr>
+            <th>Delete</th>
+            <th>User</th>
+        </tr>
+
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(us => us[i].Id)
+                    @Html.CheckBoxFor(us => us[i].Checked)
+                </td>
+                <td>
+                    @Html.DisplayFor(us => us[i].Name)
+                </td>
+            </tr>
+            
+        }
+    </table>
+    
+    <p>
+        <input type="submit" value="Delete" />
+    </p>
+</fieldset>
+
+@ViewBag.Message
+
+@{ Html.EndForm(); }

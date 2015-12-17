@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageSharingWithCloudServices.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,17 +7,18 @@ using System.Web.Mvc;
 
 
 
-namespace ImageSharingWithModel.Controllers
+namespace ImageSharingWithCloudServices.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
             CheckAda();
-            HttpCookie cookie = Request.Cookies.Get("ImageSharing");
-            if (cookie != null)
-                ViewBag.Userid = cookie["Userid"];
+            ApplicationUser user = GetLoggedInUser();
+            if (user != null)
+                ViewBag.Userid = user.UserName;
             else
                 ViewBag.Userid = "Stranger";
 

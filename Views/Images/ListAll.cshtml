@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ImageSharingWithModel.Models.Image>
+﻿@model IEnumerable<ImageSharingWithCloudServices.Models.Image>
 
 @{
     ViewBag.Title = "All Images";
@@ -19,11 +19,11 @@
     {
         <tr>
             <td>@image.Caption</td>
-            <td>@image.User.Userid</td>
+            <td>@image.User.UserName</td>
             <td>@image.Tag.Name</td>
             <td>
                 @Html.ActionLink("Details", "Details", new {Id = image.Id })
-                @if (ViewBag.Userid.Equals(image.User.Userid))
+                @if (ViewBag.Userid.Equals(image.UserId))
                 {
                     <text>
                         @Html.ActionLink("Edit", "Edit", new { Id = image.Id })

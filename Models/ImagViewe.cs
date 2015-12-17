@@ -5,7 +5,7 @@ using System.Web;
 
 using System.ComponentModel.DataAnnotations;
 
-namespace ImageSharingWithModel.Models
+namespace ImageSharingWithCloudServices.Models
 {
     public class ImageView
     {
@@ -25,6 +25,8 @@ namespace ImageSharingWithModel.Models
 
         [ScaffoldColumn(false)]
         public int id;
+        [ScaffoldColumn(false)]
+        public string Uri;
         [ScaffoldColumn(false)]
         public String TagName { get; set; }
         [ScaffoldColumn(false)]

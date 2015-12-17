@@ -1,13 +1,15 @@
-﻿@model ImageSharingWithModel.Models.Image
+﻿@model ImageSharingWithCloudServices.Models.Image
 @{
     ViewBag.Title = "Image Details";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<p><img src="@Url.Content("~/Content/Images/img-" + Model.Id + ".jpg")" /></p>
+@*<p><img src="@Url.Content("~/Content/Images/img-" + Model.Id + ".jpg")" /></p>
 
-<p>Image id: @Model.Id</p>
+<p>Image id: @Model.Id</p>*@
+
+<p><img src="@Model.Uri" /></p>
 
 <p>Tag id: @Model.Tag.Name</p>
 
@@ -17,4 +19,6 @@
 
 <p>Date taken: @Model.DateTaken.ToShortDateString()</p>
 
-<p>Uploader: @Model.User.Userid</p>
+<p>Approved: @Model.Approved</p>
+
+<p>Uploader: @Model.User.UserName</p>

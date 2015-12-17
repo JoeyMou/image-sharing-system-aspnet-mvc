@@ -12,8 +12,16 @@
     @Styles.Render("~/Content/css")
     *@
 
-    @{ 
-        var SiteCss = ViewBag.isADA ? "Site_ADA.css" : "Site.css";
+    @{         
+        var SiteCss = "";
+        if (ViewBag.isADA == null)
+        {
+            SiteCss = "Site.css";
+        }
+        else
+        {
+            SiteCss = ViewBag.isADA ? "Site_ADA.css" : "Site.css";
+        }
         var SiteCssUrl = Url.Content("~/Content/" + SiteCss);
     }
     <link href="@SiteCssUrl" rel="stylesheet" type="text/css" />
@@ -40,6 +48,9 @@
                 <li>@Html.ActionLink("List by User", "ListByuser", "Images")</li>
                 <li>@Html.ActionLink("List by Tag", "ListByTag", "Images")</li>
                 <li>@Html.ActionLink("Query","Query", "Images")</li>
+                <li>@Html.ActionLink("Approve", "Approve", "Images")</li>
+                <li>@Html.ActionLink("Delete", "Delete", "Account")</li>
+                <li>@Html.ActionLink("Supervise", "ImageViews", "Images")</li>
             </ul>
         </nav>
         

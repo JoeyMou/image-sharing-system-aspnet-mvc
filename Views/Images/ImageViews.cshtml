@@ -1,0 +1,35 @@
+﻿
+@model IEnumerable<ImageSharingWithCloudServices.Models.LogEntry>
+
+@{
+    ViewBag.Title = "Image Viewing Acticity";
+}
+<h2>@ViewBag.Title</h2>
+
+
+<table>
+    <tr>
+        <th>Caption</th>
+        <th>User</th>
+        <th>Time</th>
+    </tr>
+
+    @foreach (var entry in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(entry.Caption, "Details", new { Id = entry.ImageId })
+            </td>
+            <td>@entry.UserName</td>
+            <td>
+                @string.Format("{0:t}", entry.EntryDate)
+
+                @*<br />
+                @entry.PartitionKey
+                <br />
+                @entry.RowKey*@
+            </td>
+        </tr>
+
+    }
+</table>

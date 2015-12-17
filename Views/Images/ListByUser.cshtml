@@ -6,10 +6,13 @@
 
 <h2>@ViewBag.Title</h2>
 
-@{ Html.BeginForm("DoListByUser", "Images", FormMethod.Get); }
+@{ Html.BeginForm("DoListByUser", "Images", FormMethod.Post); }
 
 <fieldset>
     <legend>Choose a user</legend>
+
+    @Html.AntiForgeryToken()
+    
     <p>
         User: @Html.DropDownList("Id", Model)
     </p>

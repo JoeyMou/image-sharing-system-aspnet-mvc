@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace ImageSharingWithModel
+namespace ImageSharingWithCloudServices
 {
     public class BundleConfig
     {

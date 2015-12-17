@@ -5,7 +5,7 @@ using System.Web;
 
 using System.ComponentModel.DataAnnotations;
 
-namespace ImageSharingWithModel.Models
+namespace ImageSharingWithCloudServices.Models
 {
     public class Tag
     {

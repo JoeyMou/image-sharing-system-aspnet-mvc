@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ImageSharingWithModel.Models
+namespace ImageSharingWithCloudServices.Models
 {
     public class Image
         /*
@@ -23,11 +23,23 @@ namespace ImageSharingWithModel.Models
         [DisplayFormat(DataFormatString = "{0:d}")]
         public virtual DateTime DateTaken { get; set; }
 
-        [ForeignKey("User")]
-        public virtual int UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual bool Validated { get; set; }
+        public virtual bool Approved { get; set; }
+
+        //[ForeignKey("ApplicationUser")]
+        [Required]
+        public virtual String UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
         [ForeignKey("Tag")]
         public virtual int TagId { get; set; }
         public virtual Tag Tag { get; set; }
+
+        public virtual string Uri { get; set; }
+
+        public Image()
+        {
+            Validated = false;
+            Approved = false;
+        }
     }
 }

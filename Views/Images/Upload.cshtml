@@ -1,4 +1,4 @@
-﻿@model ImageSharingWithModel.Models.ImageView
+﻿@model ImageSharingWithCloudServices.Models.ImageView
 
 @{
     ViewBag.Title = "Upload";
@@ -10,12 +10,13 @@
 
 <fieldset>
     <legend>Enter Image Information</legend>
+    @Html.AntiForgeryToken()
     <p>
         Caption: @Html.TextBox("Caption")
                  @Html.ValidationMessage("Caption")
     </p>
     <p>
-        Select a tag: @Html.DropDownList("TagId", ViewBag.Tags as SelectList)
+        Select a tag: @Html.DropDownList("TagId", ViewData["tags"] as SelectList)
     </p>
     <p>
         Description:<br />
