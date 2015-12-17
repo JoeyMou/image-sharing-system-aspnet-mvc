@@ -6,5 +6,6 @@ This is actually a project for the course -- CS526 Enterprise and Cloud Computin
 Anyway, I'll keep learning it.
 
 ======Update========
+
 After one semester's study, finally finished the project. Now it's running on Microsoft Azure.
 Link: https://imagesharing.azurewebsites.net/
